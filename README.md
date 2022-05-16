@@ -1,24 +1,16 @@
-# honestfund-vue-boilerplate
+# 어니스트펀드 사전과제 (Vue 2)
 
-## Project setup
-```
-yarn install
-```
+## 과제 설명
+> 휴대전화 본인인증 페이지의 UI/UX 와 기능을 구현합니다.  
+> 주어진 라이브리 외의 추가적인 라이브러리 사용은 불가능 합니다.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## 프로젝트 초기 설정방법
 
-### Compiles and minifies for production
+### 필요 패키지 설치하기
 ```
-yarn build
+yarn install 또는 npm install
 ```
-
-### Lints and fixes files
+### 개발서버 구동하기
 ```
-yarn lint
+yarn serve 또는 npm run serve
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

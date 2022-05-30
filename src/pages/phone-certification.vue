@@ -6,7 +6,10 @@
         <ul class="list">
           <li class="item">
             <Type>인증번호</Type>
-            <Counter ref="counter" />
+            <Counter ref="counter" 
+              :initialMinute="initialMinute"
+              :initialSecond="initialSecond"
+              :timeOver="timeOver" />
             <InputContainer>
               <Input
                 name="code"
@@ -24,7 +27,7 @@
           </li>
         </ul>
       </div>
-      <Button v-bind:disabled="!this.isCompleted">본인인증하기</Button>
+      <Button v-bind:disabled="!this.isCompleted || !this.data.token">본인인증하기</Button>
     </CardForm>
     <Loading :isShow="isLoading" />
   </div>
@@ -62,7 +65,9 @@ export default {
         token: this.$route.params.token
       },
       isCompleted: false,
-      isLoading: false
+      isLoading: false,
+      initialMinute: 3,
+      initialSecond: "00",
     }
   },
   methods: {
@@ -94,6 +99,10 @@ export default {
       if (error) {
         alert(error);
       }
+    },
+    timeOver() {
+      this.data.token = null;
+      alert('제한 시간을 초과하셨습니다. 재전송 버튼을 눌러주세요');
     },
   }
 }

@@ -66,7 +66,7 @@
       </div>
       <Button v-bind:disabled="!this.isCompleted">다음</Button>
     </CardForm>
-    <Loading />
+    <Loading :isShow="isLoading" />
   </div>
 </template>
 
@@ -100,6 +100,7 @@ export default {
         mobile: null,
       },
       isCompleted: false,
+      isLoading: false
     }
   },
   methods: {
@@ -117,7 +118,25 @@ export default {
     },
     checkValidate() {
       this.isCompleted = Object.keys(this.data).every(key  => this.$validate(key, this.data[key]));
-    }
+    },
+    async onSubmit() {
+      this.isLoading = true;
+
+      const {response} = await this.$request('/request', {
+        method: 'POST',
+        body: JSON.stringify({...this.data})
+      })
+
+      this.isLoading = false;
+
+      this.$router.push({
+        name: 'PhoneCertification',
+        params: {
+          inputData: {...this.data},
+          token: response.token
+        }
+      });
+    },
   }
 }
 </script>

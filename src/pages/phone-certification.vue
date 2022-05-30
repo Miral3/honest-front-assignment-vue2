@@ -26,7 +26,7 @@
       </div>
       <Button v-bind:disabled="!this.isCompleted">본인인증하기</Button>
     </CardForm>
-    <Loading/>
+    <Loading :isShow="isLoading" />
   </div>
 </template>
 
@@ -62,6 +62,7 @@ export default {
         token: this.$route.params.token
       },
       isCompleted: false,
+      isLoading: false
     }
   },
   methods: {
@@ -73,6 +74,26 @@ export default {
     },
     checkValidate() {
       this.isCompleted = this.$validate('code', this.data.code);
+    },
+    async onSubmit() {
+      this.isLoading = true;
+
+      const {error} = await this.$request('/submit', {
+        method: 'POST',
+        body: JSON.stringify({...this.data})
+      })
+
+      this.isLoading = false;
+      this.checkCode(error);
+    },
+    checkCode(error) {
+      if (!error) {
+        alert('인증되셨습니다.');
+        this.$router.push({name: 'IdentityAuthentication'})
+      }
+      if (error) {
+        alert(error);
+      }
     },
   }
 }

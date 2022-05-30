@@ -25,6 +25,7 @@
                 :size="132" />
             </InputContainer>
             <ErrorText 
+              :class="{active: this.$validate('mobile', this.data.mobile)}"
               text="핸드폰번호" />
           </li>
           <li class="item">
@@ -43,7 +44,10 @@
                 placeholder="뒤 7자리"
                 type="password" />
             </InputContainer>
-            <ErrorText text="주민등록번호" />
+            <ErrorText 
+              :class="{active: this.$validate('civilcodeFirst', this.data.civilcodeFirst) 
+              && this.$validate('civilcodeLast', this.data.civilcodeLast)}"
+              text="주민등록번호" />
           </li>
           <li class="item">
             <Type>이름</Type>
@@ -54,7 +58,9 @@
                 size="100%"
                 placeholder="이름을 입력해 주세요"/>
             </InputContainer>
-            <ErrorText text="이름" />
+            <ErrorText 
+              :class="{active: this.$validate('name',this.  data.name)}"
+              text="이름" />
           </li>
         </ul>
       </div>

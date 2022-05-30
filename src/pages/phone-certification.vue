@@ -18,7 +18,9 @@
                 재전송
               </InnerButton>
             </InputContainer>
-            <ErrorText text="인증번호" />
+            <ErrorText 
+              :class="{active: this.$validate('code', this. data.code)}"
+              text="인증번호" />
           </li>
         </ul>
       </div>

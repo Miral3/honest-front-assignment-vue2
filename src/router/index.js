@@ -8,10 +8,24 @@ import PhoneCertification from '@/pages/phone-certification'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', redirect: '/identity-authentication' },
-  { path: '/identity-authentication', component: IdentityAuthentication },
-  { path: '/phone-certification', component: PhoneCertification },
-  { path: '*', redirect: '/' }, // fallback route
+  {
+    path: '/',
+    redirect: '/identity-authentication'
+  },
+  {
+    name: 'IdentityAuthentication',
+    path: '/identity-authentication',
+    component: IdentityAuthentication
+  },
+  {
+    name: 'PhoneCertification',
+    path: '/phone-certification',
+    component: PhoneCertification
+  },
+  {
+    path: '*',
+    redirect: '/'
+  }, // fallback route
 ]
 
 export default new VueRouter({

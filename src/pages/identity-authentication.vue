@@ -64,7 +64,7 @@
           </li>
         </ul>
       </div>
-      <Button>다음</Button>
+      <Button v-bind:disabled="!this.isCompleted">다음</Button>
     </CardForm>
     <Loading />
   </div>
@@ -99,6 +99,7 @@ export default {
         civilcodeLast: null,
         mobile: null,
       },
+      isCompleted: false,
     }
   },
   methods: {
@@ -112,7 +113,11 @@ export default {
       }
 
       this.data[name] = value;
+      this.checkValidate();
     },
+    checkValidate() {
+      this.isCompleted = Object.keys(this.data).every(key  => this.$validate(key, this.data[key]));
+    }
   }
 }
 </script>

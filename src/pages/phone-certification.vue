@@ -24,7 +24,7 @@
           </li>
         </ul>
       </div>
-      <Button>본인인증하기</Button>
+      <Button v-bind:disabled="!this.isCompleted">본인인증하기</Button>
     </CardForm>
     <Loading/>
   </div>
@@ -61,6 +61,7 @@ export default {
         code: null,
         token: this.$route.params.token
       },
+      isCompleted: false,
     }
   },
   methods: {
@@ -69,6 +70,9 @@ export default {
 
       this.data[name] = value;
       this.checkValidate();
+    },
+    checkValidate() {
+      this.isCompleted = this.$validate('code', this.data.code);
     },
   }
 }

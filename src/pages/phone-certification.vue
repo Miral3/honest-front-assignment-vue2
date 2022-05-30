@@ -17,7 +17,8 @@
                 size="100%"
                 placeholder="번호 6자리를 입력해 주세요" />
               <InnerButton
-                type="button">
+                type="button"
+                :onClick="reSendCode" >
                 재전송
               </InnerButton>
             </InputContainer>
@@ -104,6 +105,19 @@ export default {
       this.data.token = null;
       alert('제한 시간을 초과하셨습니다. 재전송 버튼을 눌러주세요');
     },
+    async reSendCode() {
+      this.isLoading = true;
+
+      const {response} = await this.$request('/request', {
+        method: 'POST',
+        body: JSON.stringify({...this.$route.params.inputData})
+      })
+
+      this.isLoading = false;
+
+      this.data.token = response.token;
+      this.$refs.counter.resetTimer();
+    }
   }
 }
 </script>

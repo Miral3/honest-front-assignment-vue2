@@ -9,16 +9,19 @@
             <InputContainer>
               <Input 
                 ref="mobileFirst"
-                name="mobileFirst" /> 
+                name="mobileFirst" 
+                @update="onChange($event)" /> 
               - 
               <Input
                 ref="mobileCenter"
                 name="mobileCenter"
+                @update="onChange($event)"
                 :size="132" /> 
               - 
               <Input
                 ref="mobileLast"
                 name="mobileLast"
+                @update="onChange($event)"
                 :size="132" />
             </InputContainer>
             <ErrorText 
@@ -29,11 +32,13 @@
             <InputContainer>
               <Input
                 name="civilcodeFirst"
+                @update="onChange($event)"
                 :size="180"
                 placeholder="앞 6자리"/>
               -
               <Input
                 name="civilcodeLast"
+                @update="onChange($event)"
                 :size="180"
                 placeholder="뒤 7자리"
                 type="password" />
@@ -45,6 +50,7 @@
             <InputContainer>
               <Input
                 name="name"
+                @update="onChange($event)"
                 size="100%"
                 placeholder="이름을 입력해 주세요"/>
             </InputContainer>
@@ -79,6 +85,29 @@ export default {
     ErrorText,
     Loading
   },
+  data() {
+    return {
+      data: {
+        name: null,
+        civilcodeFirst: null,
+        civilcodeLast: null,
+        mobile: null,
+      },
+    }
+  },
+  methods: {
+    onChange(event) {
+      const {name, value} = event.target;
+
+      if (name.includes('mobile')) {
+        this.data.mobile = this.$refs['mobileFirst'].$el.value + this.$refs['mobileCenter'].$el.value + 
+        this.$refs['mobileLast'].$el.value;
+        return;
+      }
+
+      this.data[name] = value;
+    },
+  }
 }
 </script>
 

@@ -10,6 +10,7 @@
             <InputContainer>
               <Input
                 name="code"
+                @update="onChange($event)"
                 size="100%"
                 placeholder="번호 6자리를 입력해 주세요" />
               <InnerButton
@@ -52,6 +53,22 @@ export default {
     ErrorText,
     Loading
   },
+  data() {
+    return {
+      data: {
+        code: null,
+        token: this.$route.params.token
+      },
+    }
+  },
+  methods: {
+    onChange(event) {
+      const {name, value} = event.target;
+
+      this.data[name] = value;
+      this.checkValidate();
+    },
+  }
 }
 </script>
 
